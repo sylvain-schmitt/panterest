@@ -40,7 +40,7 @@ class Pin
 
     public function setTitle(string $title): self
     {
-        $this->title = $title;
+        $this->title = ucfirst($title);
 
         return $this;
     }
@@ -52,7 +52,7 @@ class Pin
 
     public function setDescription(string $description): self
     {
-        $this->description = $description;
+        $this->description = ucfirst($description);
 
         return $this;
     }
