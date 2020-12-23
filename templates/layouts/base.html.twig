@@ -5,6 +5,25 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
+    <style>
+        .alert{
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .alert-success{
+            background-color: green;
+        }
+
+        .alert-error{
+            background-color: red;
+        }
+
+        .alert-info{
+            background-color: blue;
+        }
+    </style>
     <body>
         <nav>
             <ul>
@@ -16,6 +35,7 @@
                 </li>
             </ul>
         </nav>
+        {{ include ('layouts/partials/_flash_messages.html.twig') }}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
