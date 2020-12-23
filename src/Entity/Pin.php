@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\Timestampable;
 use App\Repository\PinRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=PinRepository::class)
@@ -33,14 +34,10 @@ class Pin
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
      */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
+    private $slug;
 
     public function getId(): ?int
     {
@@ -71,5 +68,9 @@ class Pin
         return $this;
     }
 
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
 
 }

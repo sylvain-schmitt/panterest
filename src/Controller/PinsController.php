@@ -20,7 +20,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}", name="app_pins_show")
+     * @Route("/pins/{slug}", name="app_pins_show")
      */
     public function show(Pin $pin): Response
     {
