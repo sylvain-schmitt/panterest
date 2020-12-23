@@ -8,18 +8,23 @@
 		{% endif %}
 {% endblock %}
 {% block body %}
-        {% if app.request.attributes.get('_route') == 'app_pins_edit' %}
-			<h1>Edit {{pin.title}}</h1>
-		{% else %}
-            <h1>Create Pin</h1>
-			<br>
-		{% endif %}
-            {{ form_start(form) }}
-                {{ form_widget(form) }}
-                {% if app.request.attributes.get('_route') == 'app_pins_edit' %}
-                    <button type="submit" class="">Update</button>
-                {% else %}
-                    <button type="submit" class="">Create</button>
-                {% endif %}
-            {{ form_end(form) }}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {% if app.request.attributes.get('_route') == 'app_pins_edit' %}
+                <h1>Edit {{pin.title}}</h1>
+            {% else %}
+                <h1>Create Pin</h1>
+                <br>
+            {% endif %}
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="d-grid gap-2 mt-4">
+                    {% if app.request.attributes.get('_route') == 'app_pins_edit' %}
+                        <button type="submit" class="btn btn-primary btn-block" formnovalidate>Update</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary btn-block" formnovalidate>Create</button>
+                    {% endif %}
+                {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
