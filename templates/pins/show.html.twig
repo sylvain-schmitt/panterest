@@ -6,9 +6,10 @@
             <article>
                 <h2>  {{ pin.title }} </h2>
                 <p>{{ pin.description }}</p>
+                <p>Publier {{ pin.createdAt | ago }}</p>
             </article>
             <a href="{{ path('app_pins_edit', {id: pin.id}) }}">Edit</a> |
-            <a href="#" onclick="event.preventDefault(); confirm('êtes vous sur de vouloir supprimer le pin ?') && document.getElementById('js-pin-delete-form').submit();">Delete</a> |
+            <a href="#" onclick="event.preventDefault(); confirm('êtes vous sur de vouloir supprimer {{pin.title}} ?') && document.getElementById('js-pin-delete-form').submit();">Delete</a> |
             <a href="{{ path('app_home')}}">Go Back</a>
 
             <form id="js-pin-delete-form" action="{{ path('app_pins_delete', {id: pin.id}) }}" method="post" style="display:none;">
