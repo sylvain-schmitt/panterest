@@ -7,10 +7,13 @@ use App\Repository\PinRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PinRepository::class)
  * @ORM\Table(name="pins")
+ * @Vich\Uploadable
  * @ORM\HasLifecycleCallbacks
  */
 class Pin
@@ -43,6 +46,12 @@ class Pin
      * @ORM\Column(length=128, unique=true)
      */
     private $slug;
+
+    /**
+     * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName")
+     * @var File|null
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -81,6 +90,24 @@ class Pin
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    /** 
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+
+            $this->setUpdatedAt (new \DateTimeImmutable);
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 
     public function getImageName(): ?string
