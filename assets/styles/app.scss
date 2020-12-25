@@ -26,3 +26,10 @@ body{
         background-color: blue;
     }
 }
+
+.vich-image img{
+    @extend .my-2;
+    @extend .rounded;
+    @extend .shadow;
+    @extend .img-thumbnail;
+}
