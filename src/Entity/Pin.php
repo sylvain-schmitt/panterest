@@ -44,6 +44,11 @@ class Pin
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +81,18 @@ class Pin
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
     }
 
 }
