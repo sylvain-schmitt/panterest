@@ -3,11 +3,30 @@
 {% block title 'Pinterest clone' %}
 
 {% block body %}
-    <h1>{{ pluralize(pins | length, 'Pin') }}</h1>
-        {% for pin in pins %}
-            <article>
-                <h2> <a href="{{ path('app_pins_show', {slug:pin.slug}) }}"> {{ pin.title }} </a></h2>
-                <p>{{ pin.description |u.truncate(60, '...', false) }}</p>
-            </article>
-        {% endfor %}
+	{% if pins | length > 0 %}
+		<h1 class="text-center mb-5 text-muted">{{ pluralize(pins | length, 'Pin') }}</h1>
+		<div class="row ">
+			{% for pin in pins %}
+				<div class="col-md-4 mb-5">
+					<article class="pin bg-white rounded shadow">
+                        <div class="mw-100 overflow-hidden">
+                            <a href="{{ path('app_pins_show', {slug:pin.slug}) }}">
+                                <img class="w-100 rounded-top" src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeholder.png')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.title }}"/>
+                            </a>
+                        </div>
+						<h2 class="h5 pt-3">
+							<a class="ps-3 text-decoration-none text-secondary" href="{{ path('app_pins_show', {slug:pin.slug}) }}">
+								{{ pin.title }}
+							</a>
+						</h2>
+						<p class="ps-3 pb-3 text-muted"><small>Publié par [nom de l'auteur]</small></p>
+					</article>
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		<p class="h3 text-center mt-5">Il n'y a encore aucuns pins
+			<a href="{{ path('app_pins_create') }}">Soyez le premier à en créer !</a>
+		</p>
+	{% endif %}
 {% endblock %}
