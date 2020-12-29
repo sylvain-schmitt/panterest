@@ -6,6 +6,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      {% if app.user %}
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_pins_create') }}">New Pin</a>
         </li>
@@ -13,8 +14,16 @@
           <a class="nav-link" href="#">Account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
+          <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
         </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="#">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>
