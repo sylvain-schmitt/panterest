@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="row py-5">
+    <div class="col-md-6 mx-auto">
+
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1 class="text-center mt-5 pb-5">Create an account</h1>
+
+    {{ form_start(registrationForm) }}
+    <div class="row mb-3">
+        <div class="col-6">
+        {{ form_row(registrationForm.firstName) }}
+        </div>
+        <div class="col-6">
+        {{ form_row(registrationForm.lastName) }}
+        </div>
+    </div>
+    <div class="mb-3">
+        {{ form_row(registrationForm.email) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+    </div>
+        <div class="form-check ps-0">
+        {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+
+        <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary btn-block" type="submit">
+                Register
+            </button>
+        </div>
+    {{ form_end(registrationForm) }}
+    </div>
+</div>
+{% endblock %}
